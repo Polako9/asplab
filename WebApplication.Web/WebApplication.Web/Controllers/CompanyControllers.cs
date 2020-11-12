@@ -22,7 +22,7 @@ namespace Application.Web.Controllers
             {
 
                 NumberOfCharsInName = company.Name.Length,
-                NumberOfCharsInDescription = company.Description.Lenght,
+                NumberOfCharsInDescription = company.Description.Length,
                 IsHidden = !company.IsVisible
             };
             return View("CompanyAdded", viewModel);
