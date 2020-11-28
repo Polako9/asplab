@@ -3,19 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Application.Web.Models;
+using WebApplication.Web.Database;
+using WebApplication.Web.Entities;
+using WebApplication.Web.Models;
 
-namespace Application.Web.Controllers
+namespace WebApplication.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AjaxController : ControllerBase
     {
-        public Ajax Post()
+        private readonly ExchangesDbContext _dbContext;
+        public AjaxController(ExchangesDbContext dbContext)
         {
-            var res = new Ajax();
-            res.success = true;
-            return res;
+            _dbContext = dbContext;
+        }
+
+        [HttpPost]
+        [Route("AddItem")]
+        public IActionResult AddItem(ExchangesModel exchange)
+        {
+
+            var entity = new ItemEntity
+            {
+                Name = exchange.Name,
+                Description = exchange.Description,
+                IsVisible = exchange.IsVisible,
+            };
+
+            _dbContext.Items.Add(entity);
+            _dbContext.SaveChanges();
+            return Ok();
         }
     }
 }

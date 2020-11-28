@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewBrandingStyle.Web.Models
+namespace WebApplication.Web.Controllers
 {
     public class Ajax
     {
